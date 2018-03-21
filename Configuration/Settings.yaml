@@ -1,0 +1,7 @@
+Neos:
+  Neos:
+    Ui:
+      resources:
+        javascript:
+          'Internezzo.ChildReload:ChildReload':
+            resource: resource://Internezzo.ChildReload/Public/JavaScript/ChildReload/Plugin.js

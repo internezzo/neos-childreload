@@ -1,0 +1,21 @@
+{
+    "description": "Neos CMS package that helps to reload the page on change of any of the child nodes of the specific nodetype",
+    "type": "neos-package",
+    "name": "internezzo/childreload",
+    "require": {
+        "neos/neos": "^3.3"
+    },
+    "license": [
+        "GPL-3.0-or-later"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Internezzo\\ChildReload\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Internezzo.ChildReload"
+        }
+    }
+}
