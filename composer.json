@@ -3,7 +3,7 @@
     "type": "neos-package",
     "name": "internezzo/childreload",
     "require": {
-        "neos/neos": "^3.3"
+        "neos/neos": ">=3.3"
     },
     "license": [
         "GPL-3.0-or-later"
