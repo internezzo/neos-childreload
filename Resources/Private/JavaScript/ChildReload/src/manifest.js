@@ -1,5 +1,4 @@
 import manifest from '@neos-project/neos-ui-extensibility';
-import {$get} from 'plow-js';
 import {selectors} from '@neos-project/neos-ui-redux-store';
 
 // Taken from here, as it's not exposed: '@neos-project/neos-ui-redux-store/src/CR/Nodes/helpers';
@@ -15,7 +14,7 @@ const parentNodeContextPath = contextPath => {
         return false;
     }
 
-    return `${path.substr(0, path.lastIndexOf('/'))}@${context}`;
+    return `${path.substring(0, path.lastIndexOf('/'))}@${context}`;
 };
 
 manifest('Internezzo.ChildReload:ChildReload', {}, globalRegistry => {
@@ -30,18 +29,18 @@ manifest('Internezzo.ChildReload:ChildReload', {}, globalRegistry => {
         while (true) {
             const getNodeByContextPathSelector = selectors.CR.Nodes.makeGetNodeByContextPathSelector(currentNodeContextPath);
             const node = getNodeByContextPathSelector(state);
-            const nodeTypeName = $get('nodeType', node);
+            const nodeTypeName = node.nodeType;
             const nodeTypeDefinition = nodeTypesRegistry.getNodeType(nodeTypeName);
 
             // If any of the parents' nodetype has `ui.reloadIfChildChanged` configured, then reload the iframe
-            if ($get('options.reloadIfChildChanged', nodeTypeDefinition)) {
+            if (nodeTypeDefinition.options.reloadIfChildChanged) {
                 [].slice.call(document.querySelectorAll(`iframe[name=neos-content-main]`)).forEach(iframe => {
                     const iframeWindow = iframe.contentWindow || iframe;
                     iframeWindow.location.reload();
                 });
                 break;
             }
-            // Don't traverse higher then the first found document node
+            // Don't traverse higher than the first found document node
             const isDocument = nodeTypesRegistry.hasRole(nodeTypeName, 'document');
             if (isDocument) {
                 break;
